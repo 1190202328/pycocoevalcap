@@ -1,14 +1,15 @@
 import argparse
 from pprint import pprint
 
-from pycocoevalcap.eval import COCOEvalCap
 from pycocotools.coco import COCO
+
+from eval import COCOEvalCap
 
 
 def get_score(annotation_file, results_file, selected_metrics=None):
     # create coco object and coco_result object
     if selected_metrics is None:
-        selected_metrics = {'Bleu_1', 'Bleu_2', 'Bleu_3', 'Bleu_4', 'METEOR', 'ROUGE_L', 'CIDEr', 'SPICE'}
+        selected_metrics = {'Bleu_1', 'Bleu_2', 'Bleu_3', 'Bleu_4', 'METEOR', 'ROUGE_L'}
     coco = COCO(annotation_file)
     coco_result = coco.loadRes(results_file)
 
@@ -22,10 +23,7 @@ def get_score(annotation_file, results_file, selected_metrics=None):
 
     # evaluate results
     # SPICE will take a few minutes the first time, but speeds up due to caching
-    try:
-        coco_eval.evaluate()
-    except:
-        pass
+    coco_eval.evaluate()
 
     results_dict = {}
     num = 0
@@ -46,7 +44,7 @@ if __name__ == '__main__':
     parser.add_argument("--directory", type=str)
     args = parser.parse_args()
 
-    gt_directory = '/Users/didi/Desktop/ECCV比赛/验证数据保存/NEW_Mini/vqa_anno_ans/coco_format'
+    gt_directory = '/nfs/ofs-902-1/object-detection/tangwenbo/vlm/data/CODA-LM/NEW_Mini/vqa_anno_ans/coco_format'
     pred_directory = f'{args.directory}/coco_format'
 
     json_names = ['general_perception', 'driving_suggestion']

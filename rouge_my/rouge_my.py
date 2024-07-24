@@ -33,7 +33,7 @@ def my_lcs(string, sub):
 
     return lengths[len(string)][len(sub)]
 
-class Rouge():
+class Rouge:
     '''
     Class for computing ROUGE-L score for a set of candidate sentences for the MS COCO test set
 
