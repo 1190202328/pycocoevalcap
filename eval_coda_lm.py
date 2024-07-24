@@ -1,5 +1,4 @@
 import argparse
-from pprint import pprint
 
 from pycocotools.coco import COCO
 
@@ -71,4 +70,11 @@ if __name__ == '__main__':
         print(results_dict)
         total_dict['region_perception'][json_name] = results_dict['avg']
 
-    pprint(total_dict)
+    for key in total_dict:
+        if key in json_names:
+            print(f"{key}: {total_dict[key]}")
+
+    print('region_perception:')
+    for key in total_dict['region_perception']:
+        if key in json_names_region:
+            print(f"\t{key}: {total_dict['region_perception'][key]}")
