@@ -42,7 +42,7 @@ if __name__ == '__main__':
                 line_json = json.loads(line.strip())
                 coco_json.append({
                     'image_id': line_json['image'],
-                    'caption': line_json['answer']
+                    'caption': f"{line_json['answer']}"
                 })
         with open(f'{save_directory}/{anno_name}_coco.json', mode='w', encoding='utf-8') as f:
             f.write(json.dumps(coco_json))
@@ -57,7 +57,7 @@ if __name__ == '__main__':
                 class_anno_dict[big_label] = []
             class_anno_dict[big_label].append({
                 'image_id': line_json['image'],
-                'caption': line_json['answer']
+                'caption': f"{line_json['answer']}"
             })
 
     for big_label in class_anno_dict:
